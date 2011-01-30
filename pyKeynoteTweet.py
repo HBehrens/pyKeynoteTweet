@@ -1,8 +1,35 @@
 #!/usr/bin/python
+#
+# Copyright 2010 Heiko Behrens (http://HeikoBehrens.net)
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
 '''
-Created on Nov 27, 2010
+Python script to send out tweets while you give a presentation with Keynote.
 
-@author: behrens
+    usage: ./pyKeynoteTweet.py
+    
+The script ensures that Keynote runs with a exactly one presentation.
+On startup it looks at your presenter's notes and lists every tweet it can
+find by looking for patterns like
+
+    [twitter]your tweet[/twitter]
+    
+and warns for tweets that exceed 140 characters. Only in presentation mode
+and only once for each slide it sends out tweets using twurl.
+
+For bugs or feature requests visit
+
+    https://github.com/HBehrens/pyKeynoteTweet/issues
 '''
 
 from subprocess import call, Popen, PIPE
