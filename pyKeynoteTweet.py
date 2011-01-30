@@ -18,7 +18,7 @@ Python script to send out tweets while you give a presentation with Keynote.
 
     usage: ./pyKeynoteTweet.py
     
-The script ensures that Keynote runs with a exactly one presentation.
+The script ensures that Keynote runs with exactly one presentation.
 On startup it looks at your presenter's notes and lists every tweet it can
 find by looking for patterns like
 
