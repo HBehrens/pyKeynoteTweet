@@ -86,12 +86,19 @@ def current_keynote_and_slideshow():
     return (keynote, keynote.slideshows.get()[0])
 
 def validate(slideshow):
-    for idx, slide in enumerate(slideshow.slides.get()):
+    # extra set of validated slides needed to work around strange keynote behavior of skipped slides
+    validated_slides = set()
+    for slide in slideshow.slides.get():
+        slide_id = slide.id.get()
+        if slide_id in validated_slides:
+            continue
+        validated_slides.add(slide_id)
+        
         tweet = tweet_from_slide(slide)
         if tweet:
             if len(tweet_from_slide(slide))>140:
-                raise Error("tweet to long for slide %d: %s" % (idx+1, tweet_from_slide(slide)))
-            info("will tweet(%d): %s" % (idx, tweet))
+                raise Error("tweet to long for slide %d: %s" % (slide.slide_number.get(), tweet_from_slide(slide)))
+            info("will tweet(%d): %s" % (slide.slide_number.get(), tweet))
     
 def main():
     try:
